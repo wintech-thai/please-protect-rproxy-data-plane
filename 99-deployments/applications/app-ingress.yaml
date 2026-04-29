@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ingress
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          custom: "true"
+  template:
+    metadata:
+      name: 'ingress-{{name}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/wintech-thai/please-protect-rproxy-data-plane.git
+        targetRevision: "{{name}}" #Based on environment
+        path: '99-deployments/manifests/ingress'
+      destination:
+        name: in-cluster
+        namespace: ingress
+      syncPolicy:
+        automated:
+          selfHeal: false
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
