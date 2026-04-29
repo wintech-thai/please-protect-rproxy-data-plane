@@ -9,15 +9,20 @@ spec:
       targetPort: {{ .Values.ppSensorApiDev.service.port }}
       protocol: TCP
 ---
-apiVersion: v1
-kind: Endpoints
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
 metadata:
   name: {{ .Values.ppSensorApiDev.service.name }}
-subsets:
+  labels:
+    kubernetes.io/service-name: {{ .Values.ppSensorApiDev.service.name }}
+addressType: IPv4
+ports:
+  - name: https
+    port: {{ .Values.ppSensorApiDev.service.port }}
+    protocol: TCP
+endpoints:
   - addresses:
-      - ip: {{ .Values.ppSensorApiDev.endpoints.ip }}
-    ports:
-      - port: {{ .Values.ppSensorApiDev.service.port }}
+      - {{ .Values.ppSensorApiDev.endpoints.ip }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
