@@ -30,9 +30,9 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppSensorWebDev.ingress.vhost }}"
 spec:
   ingressClassName: nginx
-  #tls:
-  #  - hosts:
-  #      - {{ .Values.ppSensorWebDev.ingress.host }}
+  tls:
+    - hosts:
+      - {{ .Values.ppSensorWebDev.ingress.host }}
   rules:
     - host: {{ .Values.ppSensorWebDev.ingress.host }}
       http:
