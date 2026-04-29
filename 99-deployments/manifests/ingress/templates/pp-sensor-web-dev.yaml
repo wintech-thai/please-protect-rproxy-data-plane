@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ppSensorWebDev.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.ppSensorWebDev.service.port }}
+      targetPort: {{ .Values.ppSensorWebDev.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.ppSensorWebDev.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.ppSensorWebDev.endpoints.ip }}
+    ports:
+      - port: {{ .Values.ppSensorWebDev.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ppSensorWebDev.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.ppSensorWebDev.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppSensorWebDev.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.ppSensorWebDev.ingress.host }}
+  rules:
+    - host: {{ .Values.ppSensorWebDev.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.ppSensorWebDev.service.name }}
+                port:
+                  number: {{ .Values.ppSensorWebDev.service.port }}
