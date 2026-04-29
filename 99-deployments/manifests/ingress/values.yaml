@@ -20,16 +20,7 @@ ppSensorWebDev:
     vhost: web-dev.sensor.local
     host: web-dev.sensor-01.please-protect.com
 
-ppSensorApiProd:
-  service:
-    name: sensor-api-upstream-prod
-    port: 443
-  endpoints:
-    ip: 10.128.15.199
-  ingress:
-    name: sensor-api-proxy-prod
-    vhost: api.sensor.local
-    host: api.sensor-01.please-protect.com
+ppSensorApiProd: {} # No API in production yet, but we want to keep the structure consistent for when we do have one.
 
 ppSensorWebProd:
   service:
