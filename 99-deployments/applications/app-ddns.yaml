@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ddns-updater
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          custom: "true"
+  template:
+    metadata:
+      name: 'ddns-updater-{{name}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/wintech-thai/please-protect-rproxy-data-plane.git
+        targetRevision: "{{name}}" #Based on environment
+        path: '99-deployments/manifests/ddns-updater'
+      destination:
+        name: in-cluster
+        namespace: ddns-updater
+      syncPolicy:
+        automated:
+          selfHeal: false
+          prune: true
+        syncOptions:
+          - CreateNamespace=true

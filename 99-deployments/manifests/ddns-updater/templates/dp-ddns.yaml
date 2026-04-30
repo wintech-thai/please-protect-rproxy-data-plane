@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflare-ddns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflare-ddns
+  template:
+    metadata:
+      labels:
+        app: cloudflare-ddns
+    spec:
+      containers:
+        - name: cloudflare-ddns
+          image: favonia/cloudflare-ddns:latest # TODO : Use immutable tag instead of "latest"
+          envFrom:
+            - configMapRef:
+                name: cloudflare-ddns
+            - secretRef:
+                name: cloudflare-ddns

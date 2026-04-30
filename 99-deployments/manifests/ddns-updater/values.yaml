@@ -1,0 +1,5 @@
+cloudflareDns:
+  zone: "please-protect.com"
+  domains: "*.sensor-01.please-protect.com"
+  proxied: "false"
+  ip6Provider: "none"
