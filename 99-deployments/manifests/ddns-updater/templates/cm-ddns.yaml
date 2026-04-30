@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: cloudflare-ddns
 data:
-  DOMAINS: {{ .Values.cloudflareDns.domains }}
-  PROXIED: {{ .Values.cloudflareDns.proxied }}
-  IP6_PROVIDER: {{ .Values.cloudflareDns.ip6Provider }}
-  ZONE: {{ .Values.cloudflareDns.zone }}
+  DOMAINS: "{{ .Values.cloudflareDns.domains }}"
+  PROXIED: "{{ .Values.cloudflareDns.proxied }}"
+  IP6_PROVIDER: "{{ .Values.cloudflareDns.ip6Provider }}"
+  ZONE: "{{ .Values.cloudflareDns.zone }}"
