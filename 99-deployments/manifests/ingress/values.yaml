@@ -65,3 +65,25 @@ ppCenterWebDev:
     name: center-web-proxy-dev
     vhost: center-dev.pp-center.local
     host: web-dev.center.please-protect.com
+
+ppCenterApiProd:
+  service:
+    name: center-api-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: center-api-proxy-prod
+    vhost: api-prod.pp-center.local
+    host: api.center.please-protect.com
+
+ppCenterApiDev:
+  service:
+    name: center-api-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: center-api-proxy-dev
+    vhost: api-dev.pp-center.local
+    host: api-dev.center.please-protect.com
