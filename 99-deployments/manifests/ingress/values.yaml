@@ -3,7 +3,7 @@ ppSensorApiDev:
     name: sensor-api-upstream-dev
     port: 443
   endpoints:
-    ip: 10.128.15.199
+    ip: 192.168.1.11
   ingress:
     name: sensor-api-proxy-dev
     vhost: api-dev.sensor.local
@@ -14,7 +14,7 @@ ppSensorWebDev:
     name: sensor-web-upstream-dev
     port: 443
   endpoints:
-    ip: 10.128.15.199
+    ip: 192.168.1.11
   ingress:
     name: sensor-web-proxy-dev
     vhost: web-dev.sensor.local
@@ -27,7 +27,7 @@ ppSensorWebProd:
     name: sensor-web-upstream-prod
     port: 443
   endpoints:
-    ip: 10.128.15.199
+    ip: 192.168.1.11
   ingress:
     name: sensor-web-proxy-prod
     vhost: web.sensor.local
