@@ -43,3 +43,14 @@ ppCenterOpenCTI:
     name: center-opencti-proxy
     vhost: opencti.pp-center.local
     host: opencti.center.please-protect.com
+
+ppCenterKeycloak:
+  service:
+    name: center-keycloak-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: center-keycloak-proxy
+    vhost: keycloak.pp-center.local
+    host: keycloak.center.please-protect.com
