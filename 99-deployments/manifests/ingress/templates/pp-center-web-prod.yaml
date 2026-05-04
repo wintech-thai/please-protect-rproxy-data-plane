@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ppCenterWebProd.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.ppCenterWebProd.service.port }}
+      targetPort: {{ .Values.ppCenterWebProd.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.ppCenterWebProd.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.ppCenterWebProd.endpoints.ip }}
+    ports:
+      - port: {{ .Values.ppCenterWebProd.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ppCenterWebProd.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.ppCenterWebProd.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppCenterWebProd.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.ppCenterWebProd.ingress.host }}
+  rules:
+    - host: {{ .Values.ppCenterWebProd.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.ppCenterWebProd.service.name }}
+                port:
+                  number: {{ .Values.ppCenterWebProd.service.port }}
