@@ -32,3 +32,14 @@ ppSensorWebProd:
     name: sensor-web-proxy-prod
     vhost: web.sensor.local
     host: web.sensor-01.please-protect.com
+
+ppCenterOpenCTI:
+  service:
+    name: center-opencti-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: center-opencti-proxy
+    vhost: opencti.pp-center.local
+    host: opencti.center.please-protect.com

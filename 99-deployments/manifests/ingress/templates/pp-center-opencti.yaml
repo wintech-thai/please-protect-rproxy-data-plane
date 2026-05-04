@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ppCenterOpenCTI.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.ppCenterOpenCTI.service.port }}
+      targetPort: {{ .Values.ppCenterOpenCTI.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.ppCenterOpenCTI.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.ppCenterOpenCTI.endpoints.ip }}
+    ports:
+      - port: {{ .Values.ppCenterOpenCTI.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ppCenterOpenCTI.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.ppCenterOpenCTI.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppCenterOpenCTI.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.ppCenterOpenCTI.ingress.host }}
+  rules:
+    - host: {{ .Values.ppCenterOpenCTI.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.ppCenterOpenCTI.service.name }}
+                port:
+                  number: {{ .Values.ppCenterOpenCTI.service.port }}
