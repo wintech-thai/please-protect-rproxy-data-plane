@@ -1,0 +1,19 @@
+---
+# ใช้ DNS challenge จะดีกว่า เพราะอันนี้ใช้ proxy กับ net บ้าน แล้วติดปัญหาเรื่องการรับ challenge จาก Let's Encrypt อยู่บ่อยๆ
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: lets-encrypt-dns
+spec:
+  acme:
+    email: pjame.fb@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: lets-encrypt-dns
+    solvers:
+      - dns01:
+          cloudflare:
+            email: pjame.fb@gmail.com
+            apiTokenSecretRef:
+              name: cloudflare-dns
+              key: CLOUDFLARE_API_TOKEN

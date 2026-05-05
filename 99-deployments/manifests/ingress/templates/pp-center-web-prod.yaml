@@ -58,6 +58,6 @@ spec:
 #  dnsNames:
 #    - {{ .Values.ppCenterWebProd.ingress.host }}
 #  issuerRef:
-#    name: lets-encrypt-issuer-prod
+#    name: lets-encrypt-dns
 #    kind: ClusterIssuer
 #    group: cert-manager.io
