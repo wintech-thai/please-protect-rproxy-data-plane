@@ -49,15 +49,15 @@ spec:
                 port:
                   number: {{ .Values.ppCenterWebDev.service.port }}
 ---
-#apiVersion: cert-manager.io/v1
-#kind: Certificate
-#metadata:
-#  name: {{ .Values.ppCenterWebDev.ingress.name }}
-#spec:
-#  secretName: {{ .Values.ppCenterWebDev.ingress.name }}
-#  dnsNames:
-#    - {{ .Values.ppCenterWebDev.ingress.host }}
-#  issuerRef:
-#    name: lets-encrypt-issuer-prod
-#    kind: ClusterIssuer
-#    group: cert-manager.io
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ppCenterWebDev.ingress.name }}
+spec:
+  secretName: {{ .Values.ppCenterWebDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.ppCenterWebDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-issuer-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
