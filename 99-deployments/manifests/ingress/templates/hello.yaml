@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-acme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-acme
+  template:
+    metadata:
+      labels:
+        app: hello-acme
+    spec:
+      containers:
+        - name: hello-acme
+          image: hashicorp/http-echo:1.0
+          args:
+            - "-text=hello world"
+          ports:
+            - containerPort: 5678
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-acme
+spec:
+  selector:
+    app: hello-acme
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 5678
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-acme
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: web-dev.center.please-protect.com
+      http:
+        paths:
+          - path: /.well-known/acme-challenge/M10yC1X2g5RksZwj-3vAksjDrKeA68z-dusUpAnAsOc
+            pathType: Exact
+            backend:
+              service:
+                name: hello-acme
+                port:
+                  number: 8089
