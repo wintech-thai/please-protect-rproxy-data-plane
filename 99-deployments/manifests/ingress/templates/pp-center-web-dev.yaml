@@ -30,6 +30,10 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppCenterWebDev.ingress.vhost }}"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ^~ /.well-known/acme-challenge/ {
+        return 404;
+      }
 spec:
   ingressClassName: nginx
   tls:
