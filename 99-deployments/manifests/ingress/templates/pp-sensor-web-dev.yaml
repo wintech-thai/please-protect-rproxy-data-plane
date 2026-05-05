@@ -33,6 +33,7 @@ spec:
   tls:
     - hosts:
       - {{ .Values.ppSensorWebDev.ingress.host }}
+      secretName: {{ .Values.ppSensorWebDev.ingress.name }}
   rules:
     - host: {{ .Values.ppSensorWebDev.ingress.host }}
       http:
@@ -44,3 +45,16 @@ spec:
                 name: {{ .Values.ppSensorWebDev.service.name }}
                 port:
                   number: {{ .Values.ppSensorWebDev.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ppSensorWebDev.ingress.name }}
+spec:
+  secretName: {{ .Values.ppSensorWebDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.ppSensorWebDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io

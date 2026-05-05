@@ -33,6 +33,7 @@ spec:
   tls:
     - hosts:
       - {{ .Values.ppCenterOpenCTI.ingress.host }}
+      secretName: {{ .Values.ppCenterOpenCTI.ingress.name }}
   rules:
     - host: {{ .Values.ppCenterOpenCTI.ingress.host }}
       http:
@@ -44,3 +45,16 @@ spec:
                 name: {{ .Values.ppCenterOpenCTI.service.name }}
                 port:
                   number: {{ .Values.ppCenterOpenCTI.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ppCenterOpenCTI.ingress.name }}
+spec:
+  secretName: {{ .Values.ppCenterOpenCTI.ingress.name }}
+  dnsNames:
+    - {{ .Values.ppCenterOpenCTI.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
