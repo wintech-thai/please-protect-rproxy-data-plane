@@ -28,6 +28,8 @@ metadata:
     nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.ppCenterWebProd.ingress.vhost }}"
     nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
     nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppCenterWebProd.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   tls:
