@@ -87,3 +87,14 @@ ppCenterApiDev:
     name: center-api-proxy-dev
     vhost: api-dev.pp-center.local
     host: api-dev.center.please-protect.com
+
+ppCenterDownloads:
+  service:
+    name: center-downloads-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: center-downloads-proxy
+    vhost: downloads.pp-center.local
+    host: downloads.center.please-protect.com

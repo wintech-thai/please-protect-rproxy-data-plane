@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.ppCenterDownloads.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.ppCenterDownloads.service.port }}
+      targetPort: {{ .Values.ppCenterDownloads.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.ppCenterDownloads.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.ppCenterDownloads.endpoints.ip }}
+    ports:
+      - port: {{ .Values.ppCenterDownloads.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ppCenterDownloads.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.ppCenterDownloads.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.ppCenterDownloads.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.ppCenterDownloads.ingress.host }}
+      secretName: {{ .Values.ppCenterDownloads.ingress.name }}
+  rules:
+    - host: {{ .Values.ppCenterDownloads.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.ppCenterDownloads.service.name }}
+                port:
+                  number: {{ .Values.ppCenterDownloads.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.ppCenterDownloads.ingress.name }}
+spec:
+  secretName: {{ .Values.ppCenterDownloads.ingress.name }}
+  dnsNames:
+    - {{ .Values.ppCenterDownloads.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
