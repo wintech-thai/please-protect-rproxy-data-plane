@@ -144,27 +144,27 @@ pleasePaymentMerchantProd:
     vhost: merchant-prod.please-payment.local
     host: merchant.please-payment.com
 
-pleasePaymentNotiHubDev:
+pleasePaymentWebDev:
   service:
-    name: please-payment-notihub-dev
+    name: please-payment-web-dev
     port: 443
   endpoints:
     ip: 192.168.1.13
   ingress:
-    name: please-payment-notihub-dev
-    vhost: notihub-dev.please-payment.local
-    host: notihub-dev.please-payment.com
+    name: please-payment-web-dev
+    vhost: web-dev.please-payment.local
+    host: web-dev.please-payment.com
 
-pleasePaymentNotiHubProd:
+pleasePaymentWebProd:
   service:
-    name: please-payment-notihub-prod
+    name: please-payment-web-prod
     port: 443
   endpoints:
     ip: 192.168.1.13
   ingress:
-    name: please-payment-notihub-prod
-    vhost: notihub-prod.please-payment.local
-    host: notihub.please-payment.com
+    name: please-payment-web-prod
+    vhost: web-prod.please-payment.local
+    host: please-payment.com
 
 pleasePaymentApiDev:
   service:

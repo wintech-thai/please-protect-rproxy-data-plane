@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.pleasePaymentWebDev.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.pleasePaymentWebDev.service.port }}
+      targetPort: {{ .Values.pleasePaymentWebDev.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.pleasePaymentWebDev.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.pleasePaymentWebDev.endpoints.ip }}
+    ports:
+      - port: {{ .Values.pleasePaymentWebDev.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.pleasePaymentWebDev.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.pleasePaymentWebDev.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.pleasePaymentWebDev.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.pleasePaymentWebDev.ingress.host }}
+      secretName: {{ .Values.pleasePaymentWebDev.ingress.name }}
+  rules:
+    - host: {{ .Values.pleasePaymentWebDev.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.pleasePaymentWebDev.service.name }}
+                port:
+                  number: {{ .Values.pleasePaymentWebDev.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.pleasePaymentWebDev.ingress.name }}
+spec:
+  secretName: {{ .Values.pleasePaymentWebDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.pleasePaymentWebDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
