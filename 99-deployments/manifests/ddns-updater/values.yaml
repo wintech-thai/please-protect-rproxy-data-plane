@@ -6,6 +6,6 @@ cloudflareDns1:
 
 cloudflareDns2:
   zone: "please-payment.com"
-  domains: "*.please-payment.com"
+  domains: "*.please-payment.com, please-payment.com"
   proxied: "false"
   ip6Provider: "none"
