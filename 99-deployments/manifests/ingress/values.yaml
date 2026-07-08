@@ -99,6 +99,66 @@ ppCenterDownloads:
     vhost: downloads.pp-center.local
     host: downloads.center.please-protect.com
 
+
+
+### Please ERP ###
+pleaseErpAdminDev:
+  service:
+    name: please-erp-admin-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-erp-admin-dev
+    vhost: admin-dev.please-erp.local
+    host: admin-dev.please-erp.com
+
+pleaseErpAdminProd:
+  service:
+    name: please-erp-admin-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-erp-admin-prod
+    vhost: admin-prod.please-erp.local
+    host: admin.please-erp.com
+
+pleaseErpTenantDev:
+  service:
+    name: please-erp-tenant-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-erp-tenant-dev
+    vhost: tenant-dev.please-erp.local
+    host: tenant-dev.please-erp.com
+
+pleaseErpTenantProd:
+  service:
+    name: please-erp-tenant-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-erp-tenant-prod
+    vhost: tenant-prod.please-erp.local
+    host: tenant.please-erp.com
+
+pleaseErpApiDev:
+  service:
+    name: please-erp-api-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-erp-api-dev
+    vhost: api-dev.please-erp.local
+    host: api-dev.please-erp.com
+
+
+
 ### Please Payment ###
 pleasePaymentAdminDev:
   service:

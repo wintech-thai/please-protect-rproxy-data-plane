@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.pleaseErpAdminProd.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.pleaseErpAdminProd.service.port }}
+      targetPort: {{ .Values.pleaseErpAdminProd.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.pleaseErpAdminProd.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.pleaseErpAdminProd.endpoints.ip }}
+    ports:
+      - port: {{ .Values.pleaseErpAdminProd.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.pleaseErpAdminProd.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.pleaseErpAdminProd.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.pleaseErpAdminProd.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.pleaseErpAdminProd.ingress.host }}
+      secretName: {{ .Values.pleaseErpAdminProd.ingress.name }}
+  rules:
+    - host: {{ .Values.pleaseErpAdminProd.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.pleaseErpAdminProd.service.name }}
+                port:
+                  number: {{ .Values.pleaseErpAdminProd.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.pleaseErpAdminProd.ingress.name }}
+spec:
+  secretName: {{ .Values.pleaseErpAdminProd.ingress.name }}
+  dnsNames:
+    - {{ .Values.pleaseErpAdminProd.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
