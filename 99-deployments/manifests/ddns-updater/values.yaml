@@ -9,3 +9,9 @@ cloudflareDns2:
   domains: "*.please-payment.com, please-payment.com"
   proxied: "false"
   ip6Provider: "none"
+
+cloudflareDns3:
+  zone: "please-erp.com"
+  domains: "*.please-erp.com, please-erp.com"
+  proxied: "false"
+  ip6Provider: "none"

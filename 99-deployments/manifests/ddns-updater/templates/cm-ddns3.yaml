@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-ddns3
+data:
+  DOMAINS: "{{ .Values.cloudflareDns3.domains }}"
+  PROXIED: "{{ .Values.cloudflareDns3.proxied }}"
+  IP6_PROVIDER: "{{ .Values.cloudflareDns3.ip6Provider }}"
+  ZONE: "{{ .Values.cloudflareDns3.zone }}"
