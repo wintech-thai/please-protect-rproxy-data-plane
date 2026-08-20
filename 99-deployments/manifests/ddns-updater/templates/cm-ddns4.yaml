@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-ddns4
+data:
+  DOMAINS: "{{ .Values.cloudflareDns4.domains }}"
+  PROXIED: "{{ .Values.cloudflareDns4.proxied }}"
+  IP6_PROVIDER: "{{ .Values.cloudflareDns4.ip6Provider }}"
+  ZONE: "{{ .Values.cloudflareDns4.zone }}"
