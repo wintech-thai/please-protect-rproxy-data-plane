@@ -1,3 +1,27 @@
+#### Please Protect Web
+ppWebProd:
+  service:
+    name: pp-web-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: pp-web-proxy-prod
+    vhost: web-prod.please-protect.local
+    host: please-protect.com
+
+ppWebDev:
+  service:
+    name: pp-web-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: pp-web-proxy-dev
+    vhost: web-dev.please-protect.local
+    host: web-dev.please-protect.com
+
+
 ppSensorApiDev:
   service:
     name: sensor-api-upstream-dev
