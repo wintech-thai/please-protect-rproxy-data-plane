@@ -27,5 +27,5 @@ cloudflareDns5:
   zone: "dev-hubs.com"
   # เอามาแแค่เว็บก่อนส่วน App ยังอยู่ที่ GCP
   domains: "web-dev.dev-hubs.com, dev-hubs.com"
-  proxied: "true"
+  proxied: "false"
   ip6Provider: "none"
