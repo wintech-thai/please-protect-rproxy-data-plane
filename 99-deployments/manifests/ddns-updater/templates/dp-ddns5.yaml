@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflare-ddns5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudflare-ddns5
+  template:
+    metadata:
+      labels:
+        app: cloudflare-ddns5
+    spec:
+      containers:
+        - name: cloudflare-ddns5
+          image: favonia/cloudflare-ddns:latest # TODO : Use immutable tag instead of "latest"
+          env:
+            - name: "DUMMY"
+              value: "001" # Use this for restarting pod 
+
+          envFrom:
+            - configMapRef:
+                name: cloudflare-ddns5
+            - secretRef:
+                name: cloudflare-ddns5

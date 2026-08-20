@@ -1,3 +1,27 @@
+#### DevHubs Web
+devHubsWebProd:
+  service:
+    name: dh-web-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: dh-web-proxy-prod
+    vhost: web-prod.dev-hubs.local
+    host: dev-hubs.com
+
+devHubsWebDev:
+  service:
+    name: dh-web-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: dh-web-proxy-dev
+    vhost: web-dev.dev-hubs.local
+    host: web-dev.dev-hubs.com
+
+
 #### Please Scan Web
 psWebProd:
   service:

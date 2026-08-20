@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.devHubsWebProd.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.devHubsWebProd.service.port }}
+      targetPort: {{ .Values.devHubsWebProd.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.devHubsWebProd.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.devHubsWebProd.endpoints.ip }}
+    ports:
+      - port: {{ .Values.devHubsWebProd.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.devHubsWebProd.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.devHubsWebProd.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.devHubsWebProd.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.devHubsWebProd.ingress.host }}
+      secretName: {{ .Values.devHubsWebProd.ingress.name }}
+  rules:
+    - host: {{ .Values.devHubsWebProd.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.devHubsWebProd.service.name }}
+                port:
+                  number: {{ .Values.devHubsWebProd.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.devHubsWebProd.ingress.name }}
+spec:
+  secretName: {{ .Values.devHubsWebProd.ingress.name }}
+  dnsNames:
+    - {{ .Values.devHubsWebProd.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
