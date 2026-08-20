@@ -15,3 +15,10 @@ cloudflareDns3:
   domains: "*.please-erp.com, please-erp.com"
   proxied: "false"
   ip6Provider: "none"
+
+cloudflareDns4:
+  zone: "please-scan.com"
+  # เอามาแแค่เว็บก่อนส่วน App ยังอยู่ที่ GCP
+  domains: "web-dev.please-scan.com, please-scan.com"
+  proxied: "false"
+  ip6Provider: "none"

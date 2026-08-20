@@ -1,3 +1,26 @@
+#### Please Scan Web
+psWebProd:
+  service:
+    name: ps-web-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-web-proxy-prod
+    vhost: web-prod.please-scan.local
+    host: please-scan.com
+
+psWebDev:
+  service:
+    name: ps-web-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-web-proxy-dev
+    vhost: web-dev.please-scan.local
+    host: web-dev.please-scan.com
+
 #### Please Protect Web
 ppWebProd:
   service:
