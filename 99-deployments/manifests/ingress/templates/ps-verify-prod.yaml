@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.psVerifyProd.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.psVerifyProd.service.port }}
+      targetPort: {{ .Values.psVerifyProd.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.psVerifyProd.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.psVerifyProd.endpoints.ip }}
+    ports:
+      - port: {{ .Values.psVerifyProd.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.psVerifyProd.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.psVerifyProd.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.psVerifyProd.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.psVerifyProd.ingress.host }}
+      secretName: {{ .Values.psVerifyProd.ingress.name }}
+  rules:
+    - host: {{ .Values.psVerifyProd.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.psVerifyProd.service.name }}
+                port:
+                  number: {{ .Values.psVerifyProd.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.psVerifyProd.ingress.name }}
+spec:
+  secretName: {{ .Values.psVerifyProd.ingress.name }}
+  dnsNames:
+    - {{ .Values.psVerifyProd.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io

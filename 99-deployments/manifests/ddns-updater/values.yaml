@@ -19,7 +19,7 @@ cloudflareDns3:
 cloudflareDns4:
   zone: "please-scan.com"
   # เอามาแแค่เว็บก่อนส่วน App ยังอยู่ที่ GCP
-  domains: "web-dev.please-scan.com, please-scan.com"
+  domains: "web-dev.please-scan.com, please-scan.com, tenant-dev.please-scan.com, tenant.please-scan.com, verify2-dev.please-scan.com, verify2.please-scan.com, register2-dev.please-scan.com, register2.please-scan.com, scan2-dev.please-scan.com, scan2.please-scan.com, api2-dev.please-scan.com, api2.please-scan.com"
   proxied: "false"
   ip6Provider: "none"
 

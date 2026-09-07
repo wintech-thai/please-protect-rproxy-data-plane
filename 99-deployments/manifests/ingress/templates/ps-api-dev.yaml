@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.psApiDev.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.psApiDev.service.port }}
+      targetPort: {{ .Values.psApiDev.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.psApiDev.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.psApiDev.endpoints.ip }}
+    ports:
+      - port: {{ .Values.psApiDev.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.psApiDev.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.psApiDev.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.psApiDev.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.psApiDev.ingress.host }}
+      secretName: {{ .Values.psApiDev.ingress.name }}
+  rules:
+    - host: {{ .Values.psApiDev.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.psApiDev.service.name }}
+                port:
+                  number: {{ .Values.psApiDev.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.psApiDev.ingress.name }}
+spec:
+  secretName: {{ .Values.psApiDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.psApiDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io

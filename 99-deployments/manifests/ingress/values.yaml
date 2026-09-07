@@ -45,6 +45,116 @@ psWebDev:
     vhost: web-dev.please-scan.local
     host: web-dev.please-scan.com
 
+psTenantProd:
+  service:
+    name: ps-tenant-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-tenant-proxy-prod
+    vhost: tenant-prod.please-scan.local
+    host: tenant.please-scan.com
+
+psTenantDev:
+  service:
+    name: ps-tenant-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-tenant-proxy-dev
+    vhost: tenant-dev.please-scan.local
+    host: tenant-dev.please-scan.com
+
+psVerifyProd:
+  service:
+    name: ps-verify-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-verify-proxy-prod
+    vhost: verify-prod.please-scan.local
+    host: verify2.please-scan.com
+
+psVerifyDev:
+  service:
+    name: ps-verify-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-verify-proxy-dev
+    vhost: verify-dev.please-scan.local
+    host: verify2-dev.please-scan.com
+
+psRegisterProd:
+  service:
+    name: ps-register-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-register-proxy-prod
+    vhost: register-prod.please-scan.local
+    host: register2.please-scan.com
+
+psRegisterDev:
+  service:
+    name: ps-register-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-register-proxy-dev
+    vhost: register-dev.please-scan.local
+    host: register2-dev.please-scan.com
+
+psScanProd:
+  service:
+    name: ps-scan-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-scan-proxy-prod
+    vhost: scan-prod.please-scan.local
+    host: scan2.please-scan.com
+
+psScanDev:
+  service:
+    name: ps-scan-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-scan-proxy-dev
+    vhost: scan-dev.please-scan.local
+    host: scan2-dev.please-scan.com
+
+psApiProd:
+  service:
+    name: ps-api-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-api-proxy-prod
+    vhost: api-prod.please-scan.local
+    host: api2.please-scan.com
+
+psApiDev:
+  service:
+    name: ps-api-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-api-proxy-dev
+    vhost: api-dev.please-scan.local
+    host: api2-dev.please-scan.com
+
 #### Please Protect Web
 ppWebProd:
   service:
