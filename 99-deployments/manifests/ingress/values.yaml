@@ -155,6 +155,28 @@ psApiDev:
     vhost: api-dev.please-scan.local
     host: api2-dev.please-scan.com
 
+psAdminDev:
+  service:
+    name: ps-admin-upstream-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-admin-proxy-dev
+    vhost: admin-dev.please-scan.local
+    host: admin-dev.please-scan.com
+
+psAdminProd:
+  service:
+    name: ps-admin-upstream-prod
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: ps-admin-proxy-prod
+    vhost: admin-prod.please-scan.local
+    host: admin-prod.please-scan.com
+
 #### Please Protect Web
 ppWebProd:
   service:

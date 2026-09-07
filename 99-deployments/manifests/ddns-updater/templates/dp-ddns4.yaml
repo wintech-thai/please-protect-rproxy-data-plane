@@ -17,7 +17,7 @@ spec:
           image: favonia/cloudflare-ddns:latest # TODO : Use immutable tag instead of "latest"
           env:
             - name: "DUMMY"
-              value: "001" # Use this for restarting pod 
+              value: "002" # Use this for restarting pod 
 
           envFrom:
             - configMapRef:
