@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.psAdminDev.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.psAdminDev.service.port }}
+      targetPort: {{ .Values.psAdminDev.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.psAdminDev.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.psAdminDev.endpoints.ip }}
+    ports:
+      - port: {{ .Values.psAdminDev.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.psAdminDev.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.psAdminDev.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.psAdminDev.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.psAdminDev.ingress.host }}
+      secretName: {{ .Values.psAdminDev.ingress.name }}
+  rules:
+    - host: {{ .Values.psAdminDev.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.psAdminDev.service.name }}
+                port:
+                  number: {{ .Values.psAdminDev.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.psAdminDev.ingress.name }}
+spec:
+  secretName: {{ .Values.psAdminDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.psAdminDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
