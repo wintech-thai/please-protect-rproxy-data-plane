@@ -175,7 +175,7 @@ psAdminProd:
   ingress:
     name: ps-admin-proxy-prod
     vhost: admin-prod.please-scan.local
-    host: admin-prod.please-scan.com
+    host: admin.please-scan.com
 
 #### Please Protect Web
 ppWebProd:
