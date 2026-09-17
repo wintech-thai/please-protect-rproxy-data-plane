@@ -76,7 +76,7 @@ psVerifyProd:
   ingress:
     name: ps-verify-proxy-prod
     vhost: verify-prod.please-scan.local
-    host: verify2.please-scan.com
+    host: verify.please-scan.com
 
 psVerifyDev:
   service:
@@ -87,7 +87,7 @@ psVerifyDev:
   ingress:
     name: ps-verify-proxy-dev
     vhost: verify-dev.please-scan.local
-    host: verify2-dev.please-scan.com
+    host: verify-dev.please-scan.com
 
 psRegisterProd:
   service:
@@ -120,7 +120,7 @@ psScanProd:
   ingress:
     name: ps-scan-proxy-prod
     vhost: scan-prod.please-scan.local
-    host: scan2.please-scan.com
+    host: scan.please-scan.com
 
 psScanDev:
   service:
@@ -131,7 +131,7 @@ psScanDev:
   ingress:
     name: ps-scan-proxy-dev
     vhost: scan-dev.please-scan.local
-    host: scan2-dev.please-scan.com
+    host: scan-dev.please-scan.com
 
 psApiProd:
   service:
