@@ -98,7 +98,7 @@ psRegisterProd:
   ingress:
     name: ps-register-proxy-prod
     vhost: register-prod.please-scan.local
-    host: register2.please-scan.com
+    host: register.please-scan.com
 
 psRegisterDev:
   service:
@@ -109,7 +109,7 @@ psRegisterDev:
   ingress:
     name: ps-register-proxy-dev
     vhost: register-dev.please-scan.local
-    host: register2-dev.please-scan.com
+    host: register-dev.please-scan.com
 
 psScanProd:
   service:
@@ -142,7 +142,7 @@ psApiProd:
   ingress:
     name: ps-api-proxy-prod
     vhost: api-prod.please-scan.local
-    host: api2.please-scan.com
+    host: api.please-scan.com
 
 psApiDev:
   service:
@@ -153,7 +153,7 @@ psApiDev:
   ingress:
     name: ps-api-proxy-dev
     vhost: api-dev.please-scan.local
-    host: api2-dev.please-scan.com
+    host: api-dev.please-scan.com
 
 psAdminDev:
   service:
