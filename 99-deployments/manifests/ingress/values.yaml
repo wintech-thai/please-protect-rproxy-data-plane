@@ -54,7 +54,7 @@ psTenantProd:
   ingress:
     name: ps-tenant-proxy-prod
     vhost: tenant-prod.please-scan.local
-    host: tenant.please-scan.com
+    host: console.please-scan.com
 
 psTenantDev:
   service:
@@ -65,7 +65,7 @@ psTenantDev:
   ingress:
     name: ps-tenant-proxy-dev
     vhost: tenant-dev.please-scan.local
-    host: tenant-dev.please-scan.com
+    host: console-dev.please-scan.com
 
 psVerifyProd:
   service:
