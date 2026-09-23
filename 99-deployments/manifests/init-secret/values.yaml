@@ -1,5 +1,5 @@
 image:
-  name: asia-southeast1-docker.pkg.dev/its-artifact-commons/please-protect/please-protect-jobs
+  name: pjamenaja/please-protect-jobs
   tag: v0.0.14
 
 configs: {}
