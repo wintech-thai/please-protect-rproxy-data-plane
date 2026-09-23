@@ -15,6 +15,20 @@ wpAldamex:
       - host: aldamexthailand.com
       - host: www.aldamexthailand.com
 
+#### Kratomcraft Web
+wpKratom:
+  service:
+    name: wp-kratom-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-kratom-proxy
+    host: kratom.wintech-thai.com
+    extrahosts:
+      - host: kratomcraft.com
+      - host: www.kratomcraft.com
+
 #### Sandbox Web
 wpSandbox:
   service:
