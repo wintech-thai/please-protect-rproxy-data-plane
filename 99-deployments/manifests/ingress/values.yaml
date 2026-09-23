@@ -10,6 +10,18 @@ wpSgl:
     name: wp-sgl-proxy
     #vhost: web-prod.wintech-thai.local
     host: sgl.wintech-thai.com #Will change to siamgreenlegend.com
+#### NAP Web
+wpNap:
+  service:
+    name: wp-nap-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-nap-proxy
+    #vhost: web-prod.wintech-thai.local
+    host: nap.wintech-thai.com #Will change to natureagroproduct.com
+
 
 ############################################
 #### DevHubs Web
