@@ -1,4 +1,48 @@
 #### Start Wordpress ####
+#### Aldamex Web
+wpAldamex:
+  service:
+    name: wp-aldamex-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-aldamex-proxy
+    host: aldamex.wintech-thai.com
+    extrahosts:
+      - host: aldamex.com
+      - host: www.aldamex.com
+      - host: aldamexthailand.com
+      - host: www.aldamexthailand.com
+
+#### Sandbox Web
+wpSandbox:
+  service:
+    name: wp-sandbox-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-sandbox-proxy
+    host: sandbox.wintech-thai.com
+    extrahosts:
+      - host: sandbox.napbiotec.io
+      - host: www.sandbox.napbiotec.io
+
+#### YoungYou Web
+wpYoungyou:
+  service:
+    name: wp-youngyou-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-youngyou-proxy
+    host: youngyou.wintech-thai.com
+    extrahosts:
+      - host: youngyoushop.com
+      - host: www.youngyoushop.com
+
 #### SGL Web
 wpSgl:
   service:
@@ -8,8 +52,11 @@ wpSgl:
     ip: 192.168.1.11
   ingress:
     name: wp-sgl-proxy
-    #vhost: web-prod.wintech-thai.local
-    host: sgl.wintech-thai.com #Will change to siamgreenlegend.com
+    host: sgl.wintech-thai.com
+    extrahosts:
+      - host: siamgreenlegend.com
+      - host: www.siamgreenlegend.com
+
 #### NAP Web
 wpNap:
   service:
@@ -19,9 +66,26 @@ wpNap:
     ip: 192.168.1.11
   ingress:
     name: wp-nap-proxy
-    #vhost: web-prod.wintech-thai.local
-    host: nap.wintech-thai.com #Will change to natureagroproduct.com
+    host: nap.wintech-thai.com
+    extrahosts:
+      - host: natureagroproduct.com
+      - host: www.natureagroproduct.com
 
+#### NAPBIOTEC Web
+wpNapbiotec:
+  service:
+    name: wp-napbiotec-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-napbiotec-proxy
+    host: napbiotec.wintech-thai.com
+    extrahosts:
+      - host: napbiotec.io
+      - host: napbiotec.com
+      - host: www.napbiotec.io
+      - host: www.napbiotec.com
 
 ############################################
 #### DevHubs Web
