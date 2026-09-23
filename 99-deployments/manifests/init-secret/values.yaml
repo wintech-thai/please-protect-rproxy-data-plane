@@ -1,6 +1,6 @@
 image:
   name: pjamenaja/please-protect-jobs
-  tag: v0.0.14
+  tag: v0.0.5
 
 configs: {}
 replica: 1
