@@ -30,6 +30,6 @@ cloudflareDns5:
 
 cloudflareDns6:
   zone: "wintech-thai.com"
-  domains: "sgl.wintech-thai.com, nap.wintech-thai.com"
+  domains: "sgl.wintech-thai.com, nap.wintech-thai.com, aldamex.wintech-thai.com, napbiotec.wintech-thai.com, youngyou.wintech-thai.com, sandbox.wintech-thai.com"
   proxied: "true"
   ip6Provider: "none"
