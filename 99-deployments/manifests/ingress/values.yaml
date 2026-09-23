@@ -1,3 +1,17 @@
+#### Start Wordpress ####
+#### SGL Web
+wpSgl:
+  service:
+    name: wp-sgl-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: wp-sgl-proxy
+    #vhost: web-prod.wintech-thai.local
+    host: sgl.wintech-thai.com #Will change to siamgreenlegend.com
+
+############################################
 #### DevHubs Web
 devHubsWebProd:
   service:
