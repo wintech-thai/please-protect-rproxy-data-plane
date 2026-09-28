@@ -1,3 +1,17 @@
+#### SnipeIt
+snipeit:
+  service:
+    name: snipeit-upstream
+    port: 443
+  endpoints:
+    ip: 192.168.1.11
+  ingress:
+    name: snipeit-proxy
+    host: snipeit.wintech-thai.com
+    extrahosts:
+      - host: snipeit.napbiotec.com
+
+
 #### Start Wordpress ####
 #### Aldamex Web
 wpAldamex:
