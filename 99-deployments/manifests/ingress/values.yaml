@@ -1,119 +1,3 @@
-#### SnipeIt
-snipeit:
-  service:
-    name: snipeit-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: snipeit-proxy
-    host: snipeit.wintech-thai.com
-    extrahosts:
-      - host: snipeit.napbiotec.com
-
-
-#### Start Wordpress ####
-#### Aldamex Web
-wpAldamex:
-  service:
-    name: wp-aldamex-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-aldamex-proxy
-    host: aldamex.wintech-thai.com
-    extrahosts:
-      - host: aldamex.com
-      - host: www.aldamex.com
-      - host: aldamexthailand.com
-      - host: www.aldamexthailand.com
-
-#### Kratomcraft Web
-wpKratom:
-  service:
-    name: wp-kratom-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-kratom-proxy
-    host: kratom.wintech-thai.com
-    extrahosts:
-      - host: kratomcraft.com
-      - host: www.kratomcraft.com
-
-#### Sandbox Web
-wpSandbox:
-  service:
-    name: wp-sandbox-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-sandbox-proxy
-    host: sandbox.wintech-thai.com
-    extrahosts:
-      - host: sandbox.napbiotec.io
-      - host: www.sandbox.napbiotec.io
-
-#### YoungYou Web
-wpYoungyou:
-  service:
-    name: wp-youngyou-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-youngyou-proxy
-    host: youngyou.wintech-thai.com
-    extrahosts:
-      - host: youngyoushop.com
-      - host: www.youngyoushop.com
-
-#### SGL Web
-wpSgl:
-  service:
-    name: wp-sgl-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-sgl-proxy
-    host: sgl.wintech-thai.com
-    extrahosts:
-      - host: siamgreenlegend.com
-      - host: www.siamgreenlegend.com
-
-#### NAP Web
-wpNap:
-  service:
-    name: wp-nap-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-nap-proxy
-    host: nap.wintech-thai.com
-    extrahosts:
-      - host: natureagroproduct.com
-      - host: www.natureagroproduct.com
-
-#### NAPBIOTEC Web
-wpNapbiotec:
-  service:
-    name: wp-napbiotec-upstream
-    port: 443
-  endpoints:
-    ip: 192.168.1.11
-  ingress:
-    name: wp-napbiotec-proxy
-    host: napbiotec.wintech-thai.com
-    extrahosts:
-      - host: napbiotec.io
-      - host: napbiotec.com
-      - host: www.napbiotec.io
-      - host: www.napbiotec.com
 
 ############################################
 #### DevHubs Web
@@ -579,3 +463,39 @@ minIoConsole:
     name: minio-console
     vhost: storage-console.please-payment.local
     host: storage-console.please-payment.com
+
+
+
+### Please Access ###
+pleaseAccessAdminDev:
+  service:
+    name: please-access-admin-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-access-admin-dev
+    vhost: admin-dev.please-access.local
+    host: admin-dev.please-access.com
+
+pleaseAccessTenantDev:
+  service:
+    name: please-access-tenant-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-access-tenant-dev
+    vhost: tenant-dev.please-access.local
+    host: tenant-dev.please-access.com
+
+pleaseAccessApiDev:
+  service:
+    name: please-access-api-dev
+    port: 443
+  endpoints:
+    ip: 192.168.1.13
+  ingress:
+    name: please-access-api-dev
+    vhost: api-dev.please-access.local
+    host: api-dev.please-access.com

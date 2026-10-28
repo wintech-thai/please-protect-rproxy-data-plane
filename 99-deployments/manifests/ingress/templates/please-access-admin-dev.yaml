@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.pleaseAccessAdminDev.service.name }}
+spec:
+  ports:
+    - port: {{ .Values.pleaseAccessAdminDev.service.port }}
+      targetPort: {{ .Values.pleaseAccessAdminDev.service.port }}
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.pleaseAccessAdminDev.service.name }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.pleaseAccessAdminDev.endpoints.ip }}
+    ports:
+      - port: {{ .Values.pleaseAccessAdminDev.service.port }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.pleaseAccessAdminDev.ingress.name }}
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: "{{ .Values.pleaseAccessAdminDev.ingress.vhost }}"
+    nginx.ingress.kubernetes.io/proxy-ssl-server-name: "on"
+    nginx.ingress.kubernetes.io/proxy-ssl-name: "{{ .Values.pleaseAccessAdminDev.ingress.vhost }}"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - {{ .Values.pleaseAccessAdminDev.ingress.host }}
+      secretName: {{ .Values.pleaseAccessAdminDev.ingress.name }}
+  rules:
+    - host: {{ .Values.pleaseAccessAdminDev.ingress.host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.pleaseAccessAdminDev.service.name }}
+                port:
+                  number: {{ .Values.pleaseAccessAdminDev.service.port }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.pleaseAccessAdminDev.ingress.name }}
+spec:
+  secretName: {{ .Values.pleaseAccessAdminDev.ingress.name }}
+  dnsNames:
+    - {{ .Values.pleaseAccessAdminDev.ingress.host }}
+  issuerRef:
+    name: lets-encrypt-dns
+    kind: ClusterIssuer
+    group: cert-manager.io
