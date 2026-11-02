@@ -1,6 +1,6 @@
 cloudflareDns1:
   zone: "please-protect.com"
-  domains: "*.sensor-01.please-protect.com,*.center.please-protect.com, please-protect.com, *.please-protect.com"
+  domains: "syslog-nap.please-protect.com, *.sensor-01.please-protect.com,*.center.please-protect.com, please-protect.com, *.please-protect.com"
   proxied: "false"
   ip6Provider: "none"
 
@@ -24,7 +24,7 @@ cloudflareDns4:
 
 cloudflareDns5:
   zone: "dev-hubs.com"
-  domains: "web-dev.dev-hubs.com, dev-hubs.com, syslog.dev-hubs.com"
+  domains: "web-dev.dev-hubs.com, dev-hubs.com"
   proxied: "false"
   ip6Provider: "none"
 
