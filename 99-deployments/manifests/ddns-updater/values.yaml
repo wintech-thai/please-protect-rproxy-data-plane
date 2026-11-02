@@ -24,7 +24,7 @@ cloudflareDns4:
 
 cloudflareDns5:
   zone: "dev-hubs.com"
-  domains: "web-dev.dev-hubs.com, dev-hubs.com"
+  domains: "web-dev.dev-hubs.com, dev-hubs.com, syslog.dev-hubs.com"
   proxied: "false"
   ip6Provider: "none"
 
